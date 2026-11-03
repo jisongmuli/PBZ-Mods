@@ -1,0 +1,26 @@
+{
+  "mod": "CodexHunPeak",
+  "version": "1.1.1-standalone",
+  "entry": [
+    "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/FormController.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/HunPeak.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/NativePort.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/config.js",
+    "ProjectPBZ/Content/JavaScript/TsMixinObject.js"
+  ],
+  "originalBootstrapSha256": "17157753931398c7704eb9d335804fd7eb271570011f17c51155ee2f6e61ef21",
+  "artifacts": {
+    "zzz_CodexHunPeak_P.pak": "e61e986617171b25c2c2967c68209c1a365eb4e8d69814570ade811e62ec0a84",
+    "zzz_CodexHunPeak_P.utoc": "ad25de6fc220d43d4d25b91c57fbb66d251f4415a4ca06f46614ed7fa3f2d66d",
+    "zzz_CodexHunPeak_P.ucas": "36be87072b2d06ac8c740ce85b326c84c27f70dc58b0257269fe02502cc605c6"
+  },
+  "capabilities": [
+    "equip-owned-black-blade",
+    "maintain-native-final-blade-effect",
+    "F8-toggle",
+    "local-status"
+  ],
+  "containsReplayOrSaveSlotCode": false,
+  "portablePaths": true,
+  "releaseNotes": "Only diagnostics/recovery paths and package layout changed; gameplay code matches the tested standalone build."
+}

@@ -1,0 +1,66 @@
+{
+  "mod": "CodexRiftArena",
+  "version": "2.0.1",
+  "files": [
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/BossCatalog.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/BossScaling.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/ChallengePlan.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/CombatServices.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/EmergencyReturn.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/EncounterCatalog.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/EncounterSnapshot.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/EncounterStorage.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/MusicCatalog.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/OriginalEncounter.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/ReplayMath.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/RiftArena.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/RiftMenu.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/config.js",
+    "ProjectPBZ/Content/JavaScript/UI/Widget/BellMenu.js"
+  ],
+  "originalBellModuleSha256": "ea1ea97753d76f49222c3e2dc8cac55338977602df091b6e3496a50ee8e5e89b",
+  "independentOfHunPeak": true,
+  "challengeMultipliers": {
+    "health": {
+      "min": 1,
+      "max": 20,
+      "integerOnly": true
+    },
+    "shachi": {
+      "min": 1,
+      "max": 20,
+      "integerOnly": true
+    },
+    "damage": {
+      "min": 1,
+      "max": 20,
+      "integerOnly": true,
+      "nativeBase": 0.5
+    }
+  },
+  "maximumBosses": 5,
+  "duplicateBosses": true,
+  "musicSelection": "first selected boss",
+  "musicProfiles": 87,
+  "modes": [
+    "arena",
+    "original-battle",
+    "original-story"
+  ],
+  "originalModesSingleBossOnly": true,
+  "phaseTransitions": "native encounter flows",
+  "recoveryJournal": "ProjectPBZ/Saved/CodexRiftArena/encounter-journal.json",
+  "bosses": {
+    "nativeBossRows": 75,
+    "selectableForms": 87,
+    "missingNativeRows": [],
+    "basis": "native codex, aliases and encounter-class variants"
+  },
+  "artifacts": {
+    "zzz_CodexRiftArena_P.pak": "97f80e2f654088a4c08346ed8cdea89439898fc2080f527cfe0105f9a8222a0a",
+    "zzz_CodexRiftArena_P.utoc": "f620212b09c3802165e148c4842de824986c05c010cb65e667a73350b430b86b",
+    "zzz_CodexRiftArena_P.ucas": "4be4fda10b829e7b35d96f1e38f6d83a04d94170b1ffc185f7260cca4f0a4625"
+  },
+  "portablePaths": true,
+  "releaseNotes": "Only diagnostics/recovery paths and package layout changed; gameplay code matches the tested standalone build."
+}

@@ -1,0 +1,18 @@
+{
+  "release": "v2.0.1",
+  "publicTests": 38,
+  "publicTestsPassed": true,
+  "gameplayBaselineTests": 45,
+  "portableConfigurationCases": 6,
+  "sourceAllowlistChecked": true,
+  "archivesChecked": true,
+  "excluded": [
+    "personal saves",
+    "account data",
+    "runtime logs",
+    "research dumps",
+    "development probes",
+    "unpacking tools"
+  ],
+  "runtimeScope": "Representative native tests of the gameplay baseline. Portable packaging is checked statically; all 87 forms, story branches, endings and actual F9 keyboard input have not been fully verified."
+}
