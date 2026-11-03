@@ -16,7 +16,7 @@ function start() {
     runtime.timer=setInterval(()=>{
         try {
             const pressed=port.keyDown();
-            if(pressed&&!down){controller.toggle();nextTick=0;nextStatus=0;}
+            if(pressed&&!down){globalThis.__CodexBossControl?.restore('切换魂·巅峰前已恢复主角',{restorePeak:false});controller.toggle();nextTick=0;nextStatus=0;}
             down=pressed;
             const now=Date.now();
             if(now>=nextTick){controller.tick();nextTick=now+750;}

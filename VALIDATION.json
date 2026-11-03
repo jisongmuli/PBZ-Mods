@@ -1,9 +1,24 @@
 {
-  "release": "v2.0.2",
-  "publicTests": 45,
+  "release": "v2.1.0",
+  "publicTests": 56,
   "publicTestsPassed": true,
-  "gameplayBaselineTests": 52,
-  "portableConfigurationCases": 6,
+  "gameplayBaselineTests": 60,
+  "portableConfigurationCases": 9,
+  "nativePrototypeChecks": [
+    "before-possession",
+    "possessed",
+    "five-stage-chain",
+    "slot-1",
+    "slot-2",
+    "slot-3",
+    "slot-4",
+    "combat-after-skills",
+    "configuration-panel",
+    "health-ratio-restored",
+    "second-entry",
+    "victory-stays-in-place",
+    "manual-return-cleanup"
+  ],
   "sourceAllowlistChecked": true,
   "archivesChecked": true,
   "excluded": [
@@ -14,5 +29,5 @@
     "development probes",
     "unpacking tools"
   ],
-  "runtimeScope": "Victory stays in place until manual F9 is covered by automated runtime mocks; no new in-game smoke test for this change. Previous gameplay baseline has representative native tests. All 87 forms, story branches, endings and actual F9 keyboard input have not been fully verified."
+  "runtimeScope": "Representative isolated in-game API tests of possession, native five-stage combo, four configured skills, pause/configuration panel, victory staying in place, health-ratio restoration, re-entry and manual-return cleanup. Actual physical keyboard/mouse input, every candidate skill, all 87 opponents, all maps and story branches still require player testing."
 }

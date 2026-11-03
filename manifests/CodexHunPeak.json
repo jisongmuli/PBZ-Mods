@@ -1,6 +1,6 @@
 {
   "mod": "CodexHunPeak",
-  "version": "1.1.1-standalone",
+  "version": "1.1.2-standalone",
   "entry": [
     "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/FormController.js",
     "ProjectPBZ/Content/JavaScript/Mods/CodexHunPeak/HunPeak.js",
@@ -10,7 +10,7 @@
   ],
   "originalBootstrapSha256": "17157753931398c7704eb9d335804fd7eb271570011f17c51155ee2f6e61ef21",
   "artifacts": {
-    "zzz_CodexHunPeak_P.pak": "15a6194c7eddd9b3a3c7718d7a1b520a6aad16452a32212801655e8244091e56",
+    "zzz_CodexHunPeak_P.pak": "f3ba20a32620759df2c0bbeaac9c0e040be9b2e36a225dc8c457fe22336cff92",
     "zzz_CodexHunPeak_P.utoc": "ad25de6fc220d43d4d25b91c57fbb66d251f4415a4ca06f46614ed7fa3f2d66d",
     "zzz_CodexHunPeak_P.ucas": "36be87072b2d06ac8c740ce85b326c84c27f70dc58b0257269fe02502cc605c6"
   },
@@ -22,5 +22,5 @@
   ],
   "containsReplayOrSaveSlotCode": false,
   "portablePaths": true,
-  "releaseNotes": "Only diagnostics/recovery paths and package layout changed; gameplay code matches the tested standalone build."
+  "releaseNotes": "Gameplay modules exactly match the accompanying standalone build and authored source; diagnostics/settings/recovery paths resolve from the game installation."
 }

@@ -22,14 +22,16 @@ function context(){
  const world=UE.PuertsServerUtils.GetPlayWorld();if(!valid(world))return null;
  const gi=UE.GameplayStatics.GetGameInstance(world);if(!valid(gi)||gi.IsLoadingLevel)return null;
  const pawn=UE.GameplayStatics.GetPlayerCharacter(world,0);if(!valid(pawn))return null;
- if(!/BP_Renewal_Hun(?:_Climax|_Young)?\./i.test(UE.KismetSystemLibrary.GetPathName(pawn.GetClass())))return null;
+ const control=globalThis.__CodexBossControl,controlled=!!(control?.active&&control.world===world&&control.boss===pawn&&valid(control.player));
+ if(!controlled&&!/BP_Renewal_Hun(?:_Climax|_Young)?\./i.test(UE.KismetSystemLibrary.GetPathName(pawn.GetClass())))return null;
+ const identity=controlled?control.player:pawn;
  const inv=UE.SubsystemBlueprintLibrary.GetWorldSubsystem(world,UE.PBZBackPackSubsystem.StaticClass());
  if(!valid(inv)||!inv.MainWeaponInfos.Num()||attr(pawn,'Health_Max')<=0)return null;
  const pipe=UE.SubsystemBlueprintLibrary.GetWorldSubsystem(world,UE.EventPipelineManager.StaticClass());
  const sequence=UE.SubsystemBlueprintLibrary.GetWorldSubsystem(world,UE.PBZLevelSequenceManager.StaticClass());
  return {world,pawn,inv,pipe,gi,pc:UE.GameplayStatics.GetPlayerController(world,0),
   blocked:UE.GameplayStatics.IsGamePaused(world)||(valid(sequence)&&sequence.IsInSequence()),
-  key:UE.KismetSystemLibrary.GetPathName(world)+'|'+UE.KismetSystemLibrary.GetPathName(pawn),
+  controlled,key:UE.KismetSystemLibrary.GetPathName(world)+'|'+UE.KismetSystemLibrary.GetPathName(identity),
   time:UE.GameplayStatics.GetTimeSeconds(world),map:UE.GameplayStatics.GetCurrentLevelName(world),location:pos(pawn.K2_GetActorLocation())};
 }
 function start(config){
@@ -48,7 +50,7 @@ function start(config){
    targetShachi:s.targetShachi,actualShachi:valid(s.enemy)?attr(s.enemy,'Shachi'):null,actualShachiMax:valid(s.enemy)?attr(s.enemy,'Shachi_Max'):null,recordExcluded:s.recordExcluded,
    selection:s.selection.slice(),musicEnabled:s.musicEnabled,music:services.status(),damageFactor:s.plan?.damageFactor,
    enemies:s.enemies.map(e=>({slot:e.index+1,name:e.boss.name,phase:e.phase,path:e.path,baseStats:e.baseStats,targetStats:e.stats,health:valid(e.actor)?attr(e.actor,'Health'):null,shachi:valid(e.actor)?attr(e.actor,'Shachi'):null})),
-   player:c?{location:c.location,health:attr(c.pawn,'Health'),max:attr(c.pawn,'Health_Max'),min:attr(c.pawn,'Health_Min'),weapons:c.inv.MainWeaponInfos.Num()}:null,
+   player:c?{controlled:!!c.controlled,location:c.location,health:attr(c.pawn,'Health'),max:attr(c.pawn,'Health_Max'),min:attr(c.pawn,'Health_Min'),weapons:c.inv.MainWeaponInfos.Num()}:null,
    original:original.status(),result:s.result,errors:s.errors};
   UE.EasyCsv.SaveStringToFileWithFullPath(JSON.stringify(data,null,2),config.arenaStatusFile);
   s.lastStatus=data;return data;
@@ -196,6 +198,7 @@ function start(config){
   s.result=reason;s.phase='completed';hideTip();tip(c,reason+'\nF9  返回铃铛');status();
  }
  function finish(reason,point=s.arrival){
+  globalThis.__CodexBossControl?.restore('已清空挑战并恢复主角');
   const c=context();s.generation++;hideTip();
   if(valid(s.menuPush))s.menuPush.Cancel();s.menuPush=null;s.menuOpening=false;
   for(const menu of [...s.menus])try{menu.DeactivateWidget();}catch(_){}s.menus.clear();
@@ -279,7 +282,7 @@ function start(config){
    const e=new UE.Key();e.KeyName='E';const pressed=c.pc.IsInputKeyDown(e);
    if(attr(c.pawn,'Health')<=0)return;
    if(c.blocked){eDown=pressed;hideTip();if(now>=nextStatus){nextStatus=now+3000;status();}return;}
-   if(s.closed&&s.phase==='idle'&&!s.menus.size&&!s.menuOpening){
+   if(s.closed&&s.phase==='idle'&&!c.controlled&&!s.menus.size&&!s.menuOpening){
     const nearDoor=s.entrance&&distance(c.location,s.entrance.location)<220;
     const nearBell=s.bellPoint&&distance(c.location,s.bellPoint)<360;
     if(nearDoor){tip(c,streamed()?'E  进入影境再战':'影境正在准备…');if(pressed&&!eDown)enter();}
@@ -306,11 +309,15 @@ function start(config){
       entry.floorHandle=scaling.holdFloor(enemy);
      }
      s.baseStats=s.enemies[0].baseStats;s.targetHealth=s.enemies[0].stats.health;s.targetShachi=s.enemies[0].stats.shachi;
-     services.start(c,s.plan,s.enemies,a=>ownedBy(a,new Set(s.enemies.map(e=>e.path))));
+     services.start(c,s.plan,s.enemies,a=>ownedBy(a,new Set(s.enemies.map(e=>e.path))));s.serviceContext=c;
      for(const entry of s.enemies){entry.actor.SetActorHiddenInGame(false);entry.actor.SetActorEnableCollision(true);entry.phase='fighting';}
      s.phase='fighting';hideTip();status();
     }
    }else if(s.phase==='fighting'){
+    if(s.serviceContext?.pawn!==c.pawn){
+     services.stop(s.serviceContext);restoreMin(c);s.floorActor=c.pawn;s.floorHandle=scaling.holdFloor(c.pawn);
+     services.start(c,s.plan,s.enemies,a=>ownedBy(a,new Set(s.enemies.map(e=>e.path))));s.serviceContext=c;
+    }
     services.tick(c);
     if(attr(c.pawn,'Health')<=1.01)finish('本次挑战结束');
     else{
@@ -331,6 +338,7 @@ function start(config){
  s.select=select;s.enter=enter;s.finish=finish;s.openMenu=openMenu;s.context=context;s.status=status;
  s.startChallenge=startChallenge;s.returnToBell=()=>{if(original.active)return original.requestReturn();finish('已清空挑战并返回铃铛');return true;};
  s.startMode=mode=>{
+  if(globalThis.__CodexBossControl?.active)return false;
   if(mode==='arena')return startChallenge();
   if(!['original-battle','original-story'].includes(mode)||s.phase!=='idle'||s.selection.length!==1)return false;
   const c=context();if(!c||!s.arrival||distance(c.location,s.arrival.location)>1000||attr(c.pawn,'Health')<=1)return false;

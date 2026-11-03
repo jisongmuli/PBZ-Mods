@@ -1,3 +1,4 @@
-214e6ac92dfa54a18cd03aa9c0cf3e4ea8d6c7080349b3780b52a14fc114298b  PBZ-HunPeak-v1.1.1.zip
-460faff67c9d2a81a3f71c9a39cd69c883ab8077d02372d026ee23386b145b42  PBZ-Mods-v2.0.2.zip
-4b38070ce1ff1ad0fa6f3e4e97fd2126430c6d38a3b07a0b65c5b86404c0bc56  PBZ-RiftArena-v2.0.2.zip
+e9cb754de22c0a2c77ecf0187dac60d47ff9b6bbc48b51ff791a2bc8e9f9d79d  PBZ-BossControl-v0.1.0-alpha.zip
+0ff7c2a10da2600dd8b0d97fd093409cdf0ea67eb5d2e97f941dde2e425070a6  PBZ-HunPeak-v1.1.2.zip
+d3f952840e1c41382a4e383e18577b38ca41e83a218d2eeca0a6aa3ae7fc5ea3  PBZ-Mods-v2.1.0.zip
+cbef72a39236e423ad624e5ee658404b057281df93bf8155b4ec5adb51065a82  PBZ-RiftArena-v2.1.0.zip

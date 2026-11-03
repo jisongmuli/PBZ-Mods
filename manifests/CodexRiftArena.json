@@ -1,6 +1,6 @@
 {
   "mod": "CodexRiftArena",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "files": [
     "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/BossCatalog.js",
     "ProjectPBZ/Content/JavaScript/Mods/CodexRiftArena/BossScaling.js",
@@ -58,10 +58,10 @@
     "basis": "native codex, aliases and encounter-class variants"
   },
   "artifacts": {
-    "zzz_CodexRiftArena_P.pak": "3a542e3bcd2d32ea3d138936e85c26aba865e03d4232e2b457da3555eaae8f01",
+    "zzz_CodexRiftArena_P.pak": "83c4a893d977d8c50514b2499733c8489ada3be85eac70a94c7b431b7a9c20e5",
     "zzz_CodexRiftArena_P.utoc": "f620212b09c3802165e148c4842de824986c05c010cb65e667a73350b430b86b",
     "zzz_CodexRiftArena_P.ucas": "4be4fda10b829e7b35d96f1e38f6d83a04d94170b1ffc185f7260cca4f0a4625"
   },
   "portablePaths": true,
-  "releaseNotes": "Gameplay modules exactly match the accompanying standalone build and authored source; diagnostics/recovery paths resolve from the game installation."
+  "releaseNotes": "Gameplay modules exactly match the accompanying standalone build and authored source; diagnostics/settings/recovery paths resolve from the game installation."
 }

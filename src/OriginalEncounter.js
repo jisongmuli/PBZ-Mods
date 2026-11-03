@@ -33,6 +33,7 @@ class OriginalEncounter {
  }
  rawContext(){const world=UE.PuertsServerUtils.GetPlayWorld();if(!valid(world))return null;return {world,gi:UE.GameplayStatics.GetGameInstance(world),pc:UE.GameplayStatics.GetPlayerController(world,0)};}
  requestReturn(reason='已清空挑战并返回铃铛'){
+  globalThis.__CodexBossControl?.restore('返回铃铛前已恢复主角');
   if(!this.active)return false;this.result=reason;
   if(this.phase==='checkpoint'){++this.generation;this.storage.release();this.phase='idle';this.done?.(reason);return true;}
   if(this.phase==='staging'){this.returnWanted=true;return true;}
@@ -139,7 +140,7 @@ class OriginalEncounter {
    this.services.start(c,{...this.plan,originalMap:true},[],a=>this.owns(a));this.nextScan=0;
   }
   if(this.phase!=='encounter')return;
-  if(c.key!==this.playerKey){
+  if(c.key!==this.playerKey||c.pawn!==previousContext?.pawn){
    // Native phases can replace Hun, change his form, or travel to a later
    // encounter stage. Keep the session and bind to the initialized new pawn.
    this.services.stop(previousContext);scaling.releaseFloor(this.floorActor,this.floorHandle);this.playerKey=c.key;this.floorActor=c.pawn;this.floorHandle=scaling.holdFloor(c.pawn);

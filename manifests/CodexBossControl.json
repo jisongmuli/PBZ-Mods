@@ -1,0 +1,31 @@
+{
+  "mod": "CodexBossControl",
+  "version": "0.1.0-alpha",
+  "files": [
+    "ProjectPBZ/Content/JavaScript/MainStart.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/BossComboController.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/BossControl.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/BossScaling.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/MoYuanProfile.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/ReplayMath.js",
+    "ProjectPBZ/Content/JavaScript/Mods/CodexBossControl/config.js"
+  ],
+  "originalMainStartSha256": "69bfda4eae4ec27602485f2f80342d8ecc236775468755dbe8315cbf4ece400b",
+  "toggleKey": "F7",
+  "configurationKey": "F6",
+  "nativeComboStages": 5,
+  "configurableSkills": 27,
+  "usesNativeBossAbilities": true,
+  "blocksSavingOnlyWhileTransformed": true,
+  "requiresCompatibilityUpdatesForCoInstallation": {
+    "CodexHunPeak": "1.1.2",
+    "CodexRiftArena": "2.1.0"
+  },
+  "artifacts": {
+    "zzz_CodexBossControl_P.pak": "f5045b61c4240477677cd7980c3e80bcbc7fef4587dbf5eab10eda306766c2a6",
+    "zzz_CodexBossControl_P.utoc": "db690972b4f27ec35911e87de8f923c4109821259b50c64ebd2c05aa0040a790",
+    "zzz_CodexBossControl_P.ucas": "07df94ece2d70a872ac77a2bfffe978546eab2d09b8eac921ae2abde32a80dff"
+  },
+  "portablePaths": true,
+  "releaseNotes": "Gameplay modules exactly match the accompanying standalone build and authored source; diagnostics/settings/recovery paths resolve from the game installation."
+}

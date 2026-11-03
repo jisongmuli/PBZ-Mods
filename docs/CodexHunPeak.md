@@ -6,6 +6,8 @@
 
 与影境再战独立版互不依赖，可分别启用和卸载。手动换到其他武器时尊重你的选择；再按 F8 关闭并开启可重新进入形态。
 
+1.1.2 增加可选的 F7 堡主操控兼容。按 F8 时若处于堡主状态，会先恢复主角，再处理魂·巅峰开关；未安装堡主操控时保持原有行为。
+
 安装的三个文件位于游戏 ProjectPBZ/Content/Paks/~mods：zzz_CodexHunPeak_P.pak、zzz_CodexHunPeak_P.utoc、zzz_CodexHunPeak_P.ucas。三个文件一起启用；安装后需要正常重启游戏。卸载时退出游戏，将这三个文件移出 Paks 即可。不要同时启用旧的 zzz_CodexFinalForm_P 测试包。
 
 状态记录位于 ProjectPBZ/Saved/CodexHunPeak/status.json，可检查角色生命、背包就绪状态、当前武器和实际效果。读档、死亡、过场、暂停时等待角色就绪再工作，不改变生命数值，也不强行重载场景。
