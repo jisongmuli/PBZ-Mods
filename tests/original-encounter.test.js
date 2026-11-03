@@ -42,3 +42,11 @@ test('native form replacement or stage travel rebinds combat services without en
  r.phase='encounter';r.playerKey='old|pawn';r.seenCombat=true;r.nextScan=Infinity;r.sequences=()=>{};
  r.tick({...f.c,key:'new-stage|climax',map:'LaterStage'});assert.equal(r.phase,'encounter');assert.equal(r.playerKey,'new-stage|climax');assert.ok(f.calls.some(c=>c[0]==='services'));assert.equal(f.calls.some(c=>c[0]==='travel'&&c[1]==='return'),false);
 });
+for(const mode of ['original-battle','original-story'])test(mode+' keeps the native encounter after boss death until manual return',()=>{
+ const f=fixture(),r=f.result;r.start(f.c,{...f.plan,mode},f.profile);r.storage.checkpointDone(null,f.snapshot);r.storage.stageDone(null,'encounter');
+ r.phase='encounter';r.playerKey=f.c.key;r.seenCombat=true;r.nextScan=Infinity;r.sequences=()=>{};
+ r.records.set('boss',{actor:{health:0},scaled:true});
+ for(let i=0;i<20;i++)r.tick(f.c);
+ assert.equal(r.phase,'encounter');assert.equal(f.calls.some(c=>c[0]==='travel'&&c[1]==='return'),false);
+ assert.equal(r.requestReturn(),true);assert.equal(r.phase,'returning');assert.equal(f.calls.filter(c=>c[0]==='travel'&&c[1]==='return').length,1);
+});

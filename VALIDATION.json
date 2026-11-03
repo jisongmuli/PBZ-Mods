@@ -1,8 +1,8 @@
 {
-  "release": "v2.0.1",
-  "publicTests": 38,
+  "release": "v2.0.2",
+  "publicTests": 45,
   "publicTestsPassed": true,
-  "gameplayBaselineTests": 45,
+  "gameplayBaselineTests": 52,
   "portableConfigurationCases": 6,
   "sourceAllowlistChecked": true,
   "archivesChecked": true,
@@ -14,5 +14,5 @@
     "development probes",
     "unpacking tools"
   ],
-  "runtimeScope": "Representative native tests of the gameplay baseline. Portable packaging is checked statically; all 87 forms, story branches, endings and actual F9 keyboard input have not been fully verified."
+  "runtimeScope": "Victory stays in place until manual F9 is covered by automated runtime mocks; no new in-game smoke test for this change. Previous gameplay baseline has representative native tests. All 87 forms, story branches, endings and actual F9 keyboard input have not been fully verified."
 }

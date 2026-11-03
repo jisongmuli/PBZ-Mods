@@ -188,6 +188,13 @@ function start(config){
   hideTip();teleport(c,s.arrival);s.result=null;return true;
  }
  function restoreMin(c){if(s.floorHandle){scaling.releaseFloor(s.floorActor,s.floorHandle);s.floorHandle=null;s.floorActor=null;}}
+ function completeChallenge(c,reason){
+  // Settlement and leaving the arena are separate actions. Keep the session
+  // completed until F9 so victory cannot trigger a teleport on the next tick.
+  s.generation++;services.stop(c);restoreMin(c);
+  if(attr(c.pawn,'Health')>0)setAttr(c.pawn,'Health',attr(c.pawn,'Health_Max'));
+  s.result=reason;s.phase='completed';hideTip();tip(c,reason+'\nF9  返回铃铛');status();
+ }
  function finish(reason,point=s.arrival){
   const c=context();s.generation++;hideTip();
   if(valid(s.menuPush))s.menuPush.Cancel();s.menuPush=null;s.menuOpening=false;
@@ -312,9 +319,11 @@ function start(config){
       if(!valid(entry.actor)){entry.phase='vanished';s.incompleteFight=true;destroyEnemies([entry]);}
       else if(attr(entry.actor,'Health')<=1.01){entry.phase='defeated';destroyEnemies([entry]);}
      }
-     if(s.enemies.every(e=>e.phase!=='fighting'))finish(s.incompleteFight?'本次挑战已结束':'挑战成功');
+     if(s.enemies.every(e=>e.phase!=='fighting'))completeChallenge(c,s.incompleteFight?'本次挑战已结束':'挑战成功');
      else if(s.battle&&(Math.abs(c.location.Z-s.battle.location.Z)>1800||distance(c.location,s.battle.location)>13000))finish('已返回挑战铃铛');
     }
+   }else if(s.phase==='completed'){
+    tip(c,s.result+'\nF9  返回铃铛');
    }
    if(now>=nextStatus){nextStatus=now+3000;status();}
   }catch(e){const error=String(e.stack||e);if(s.errors[s.errors.length-1]!==error)s.errors.push(error);try{if(['initializing','fighting','queued'].includes(s.phase))finish('挑战暂时无法开始');status();}catch(_){} }
