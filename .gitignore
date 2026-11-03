@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.sav
+*.log
+.env
+release-assets/
